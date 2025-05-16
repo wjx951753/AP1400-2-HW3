@@ -29,8 +29,17 @@ public:
     Node** find_successor(int value);
     bool delete_node(int value);
 
+    BST() noexcept = default;
+    BST(BST&& other) noexcept;
+    ~BST();
+    BST(const BST& other) : root(copyTree(other.root)) {};
+    BST& operator=(const BST& other);
+    BST& operator=(BST&& other) noexcept;
+
 private:
     Node* addSubTree(Node* root, int value); 
-    Node* root;
+    Node* copyTree(Node* node);
+    void destroyTree(Node* node);
+    Node* root; 
 };
 #endif //BST_H
